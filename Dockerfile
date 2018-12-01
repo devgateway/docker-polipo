@@ -10,9 +10,10 @@ RUN set -x; \
   && cd polipo-polipo-$VERSION \
   && patch -p 1 <../make.patch \
   && export CFLAGS='-O2 -fPIE -s' \
-  && make \
-    -DNO_SOCKS \
-    -DNO_FORBIDDEN \
-    -DNO_SYSLOG \
-    -DNO_REDIRECTOR \
-    install
+  && export PLATFORM_DEFINES='-DNO_SOCKS -DNO_FORBIDDEN -DNO_SYSLOG -DNO_REDIRECTOR' \
+  && make install \
+  && cd .. \
+  && rm -rf polipo-$VERSION.tar.gz polipo-polipo-$VERSION \
+  && apk del .build-deps \
+  && mkdir -p /var/cache/polipo \
+  && chown nobody:nobody /var/cache/polipo
