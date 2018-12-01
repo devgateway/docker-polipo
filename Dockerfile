@@ -17,3 +17,6 @@ RUN set -x; \
   && apk del .build-deps \
   && mkdir -p /var/cache/polipo \
   && chown nobody:nobody /var/cache/polipo
+
+COPY polipo.conf /etc/polipo/config
+COPY polipo.sh /etc/periodic/daily/polipo
