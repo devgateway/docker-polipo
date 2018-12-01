@@ -1,0 +1,26 @@
+--- orig/Makefile
++++ new/Makefile
+@@ -1,4 +1,4 @@
+-PREFIX = /usr/local
++PREFIX = /usr
+ BINDIR = $(PREFIX)/bin
+ MANDIR = $(PREFIX)/man
+ INFODIR = $(PREFIX)/info
+@@ -83,16 +83,8 @@
+ 
+ all: polipo$(EXE) polipo.info html/index.html localindex.html
+ 
+-install: install.binary install.man
+-
+-install.binary: all
+-	mkdir -p $(TARGET)$(BINDIR)
+-	mkdir -p $(TARGET)$(LOCAL_ROOT)
+-	mkdir -p $(TARGET)$(LOCAL_ROOT)/doc
+-	rm -f $(TARGET)$(BINDIR)/polipo
++install: polipo$(EXE)
+ 	cp -f polipo $(TARGET)$(BINDIR)/
+-	cp -f html/* $(TARGET)$(LOCAL_ROOT)/doc
+-	cp -f localindex.html $(TARGET)$(LOCAL_ROOT)/index.html
+ 
+ install.man: all
+ 	mkdir -p $(TARGET)$(MANDIR)/man1
