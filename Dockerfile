@@ -24,3 +24,15 @@ RUN set -x; \
 
 COPY polipo.conf /etc/polipo/config
 COPY polipo.sh /etc/periodic/daily/polipo
+COPY entrypoint.sh /
+
+WORKDIR /var/cache/polipo
+
+USER nobody
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["polipo"]
+
+VOLUME /var/cache/polipo
+
+EXPOSE 3128
