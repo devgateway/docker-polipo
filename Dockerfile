@@ -9,6 +9,7 @@ RUN set -x; \
   && tar -xf polipo-$VERSION.tar.gz \
   && cd polipo-polipo-$VERSION \
   && patch -p 1 <../make.patch \
+  && patch -p 1 <../ipv6-check.patch \
   && export CFLAGS='-O2 -fPIE -s' \
   && export PLATFORM_DEFINES='-DNO_SOCKS -DNO_FORBIDDEN -DNO_SYSLOG -DNO_REDIRECTOR' \
   && make install \

@@ -1,0 +1,55 @@
+--- polipo-polipo-1.1.1/polipo.h
++++ fix/polipo.h
+@@ -132,16 +132,20 @@
+ 
+ #ifndef NO_IPv6
+ 
+-#ifdef __GLIBC__
+-#if (__GLIBC__ > 2) || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 2)
+ #define HAVE_IPv6
++
++#ifdef __GLIBC__
++#if (__GLIBC__ < 2) || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 2)
++#undef HAVE_IPv6
+ #endif
+ #endif
+ 
+ #ifdef __FreeBSD__
+ #define HAVE_ASPRINTF
++#if __FreeBSD_version < 400000
++#undef HAVE_IPv6
++#endif
+ #if __FreeBSD_version >= 400000
+-#define HAVE_IPv6
+ #define HAVE_TIMEGM
+ #endif
+ #if __FreeBSD_version >= 503001
+@@ -150,8 +154,8 @@
+ #endif
+ 
+ #ifdef __NetBSD__
+-#if __NetBSD_Version__ >= 105000000
+-#define HAVE_IPv6
++#if __NetBSD_Version__ < 105000000
++#undef HAVE_IPv6
+ #endif
+ #if __NetBSD_Version__ >= 200000000
+ #define HAVE_TIMEGM
+@@ -160,14 +164,13 @@
+ #endif
+ 
+ #ifdef __OpenBSD__
+-#if OpenBSD >= 200311
+-#define HAVE_IPv6
++#if OpenBSD < 200311
++#undef HAVE_IPv6
+ #endif
+ #endif
+ 
+ #ifdef __APPLE__
+ #define HAVE_ASPRINTF
+-#define HAVE_IPv6
+ #define HAVE_TIMEGM
+ #define HAVE_FFSL
+ #endif
+
