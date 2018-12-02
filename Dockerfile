@@ -1,7 +1,7 @@
 # Copyright 2018, Development Gateway, see COPYING
 FROM alpine:3.8
 
-ARG VERSION 1.1.1
+ARG VERSION=1.1.1
 
 RUN set -x; \
   apk add --no-cache --virtual .build-deps gcc make libc-dev \
@@ -19,7 +19,7 @@ RUN set -x; \
   && mkdir -p /var/cache/polipo \
   && chown nobody:nobody /var/cache/polipo \
   && crontab -r \
-  && echo '0 2 * * * run-parts /etc/periodic/daily' >/var/spool/cron/crontabs/nobody
+  && echo '0 2 * * * run-parts /etc/periodic/daily' >/var/spool/cron/crontabs/nobody \
   && chown nobody:nobody /var/spool/cron/crontabs/nobody
 
 COPY polipo.conf /etc/polipo/config
