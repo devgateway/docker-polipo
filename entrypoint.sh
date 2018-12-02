@@ -6,4 +6,4 @@ fi
 
 crond -L /dev/null
 
-exec polipo -c /etc/polipo/polipo.conf
+exec polipo -c /etc/polipo/config
