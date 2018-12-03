@@ -8,7 +8,14 @@ CONFIG_FILE=/etc/polipo/config
 
 crond -L /dev/null
 
-for DIRECTIVE in maxDiskCacheEntrySize diskCacheTruncateSize; do
+# add optional Polipo configuration
+DIRECTIVES='
+  maxDiskCacheEntrySize
+  diskCacheTruncateTime
+  diskCacheTruncateSize
+  diskCacheUnlinkTime
+'
+for DIRECTIVE in $DIRECTIVES; do
   eval VALUE="\$$(echo $DIRECTIVE | sed 's/[[:upper:]]/_&/g' | tr '[[:lower:]]' '[[:upper:]]')"
   if [ -n "$VALUE" ]; then
     echo "$DIRECTIVE = $VALUE" >>"$CONFIG_FILE"
