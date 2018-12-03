@@ -5,10 +5,11 @@ if [ "$1" != "polipo" ]; then
 fi
 
 CONFIG_FILE=/etc/polipo/config
+CRONTAB=/var/spool/cron/crontabs/nobody
 
 # install a crontab to purge the cache
 : ${CACHE_PURGE_SCHEDULE:=0 2 * * *}
-echo "$CACHE_PURGE_SCHEDULE kill -USR1 1; sleep 1; polipo -x; kill -USR2 1" | crontab -
+echo "$CACHE_PURGE_SCHEDULE kill -USR1 1; sleep 1; polipo -x; kill -USR2 1" >"$CRONTAB"
 
 # spawn a cron daemon
 crond -L /dev/null

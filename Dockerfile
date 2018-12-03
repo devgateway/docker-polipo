@@ -18,7 +18,8 @@ RUN set -x; \
   && apk del .build-deps \
   && mkdir -p /var/cache/polipo \
   && chown nobody:nobody /var/cache/polipo \
-  && crontab -r
+  && crontab -r \
+  && chown nobody /var/spool/cron/crontabs
 
 COPY --chown=65534 polipo.conf /etc/polipo/config
 COPY entrypoint.sh /
