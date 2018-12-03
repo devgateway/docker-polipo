@@ -22,7 +22,7 @@ RUN set -x; \
   && echo '0 2 * * * run-parts /etc/periodic/daily' >/var/spool/cron/crontabs/nobody \
   && chown nobody:nobody /var/spool/cron/crontabs/nobody
 
-COPY polipo.conf /etc/polipo/config
+COPY --chown 65534 polipo.conf /etc/polipo/config
 COPY polipo.sh /etc/periodic/daily/polipo
 COPY entrypoint.sh /
 
