@@ -6,6 +6,11 @@ fi
 
 CONFIG_FILE=/etc/polipo/config
 
+# install a crontab to purge the cache
+: ${CACHE_PURGE_SCHEDULE:=0 2 * * *}
+echo "$CACHE_PURGE_SCHEDULE kill -USR1 1; sleep 1; polipo -x; kill -USR2 1" | crontab -
+
+# spawn a cron daemon
 crond -L /dev/null
 
 # add optional Polipo configuration
