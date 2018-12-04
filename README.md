@@ -17,17 +17,13 @@ Polipo runs as user `nobody`, uid 65534.
 ### `/var/cache/polipo`
 
 Path to the disk cache directory. Polipo will store files up to a certain size in its disk cache.
-The cron job spawned by the init script will trim or remove files that are unused for certain time
-spands. See environment variables below and
-[Purging the on-disk cache](https://www.irif.fr/~jch/software/polipo/manual/Purging.html).
+
+## Purging Disk Cache
+
+Run `/usr/lib/cache-purge.sh` in the container. It will make Polipo flush memory cache to disk,
+trim the files, and reload.
 
 ## Environment Variables
-
-### `CACHE_PURGE_SCHEDULE`
-
-The time interval in `crontab(5)` format for running cache purge job. Default is nightly at 02:00.
-
-Default: `0 2 * * *`
 
 ### `DISK_CACHE_TRUNCATE_SIZE`
 
@@ -52,6 +48,10 @@ Default: `32d`
 Maximum size of objects cached on disk.
 
 Default: `-1` (unlimited)
+
+## See Also
+
+[Polipo Manual](https://www.irif.fr/~jch/software/polipo/manual/index.html).
 
 ## Copyright
 
