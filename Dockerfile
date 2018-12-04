@@ -17,11 +17,10 @@ RUN set -x; \
   && rm -rf polipo-$VERSION.tar.gz polipo-$VERSION \
   && apk del .build-deps \
   && mkdir -p /var/cache/polipo \
-  && chown nobody:nobody /var/cache/polipo \
-  && crontab -r \
-  && chown nobody /var/spool/cron/crontabs
+  && chown nobody:nobody /var/cache/polipo
 
 COPY --chown=65534 polipo.conf /etc/polipo/config
+COPY cache-purge.sh /usr/lib/
 COPY entrypoint.sh /
 
 WORKDIR /var/cache/polipo
