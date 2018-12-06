@@ -51,7 +51,7 @@ Default: `-1` (unlimited)
 
 ## See Also
 
-[Polipo Manual](https://www.irif.fr/~jch/software/polipo/manual/index.html).
+[Polipo Manual](https://www.irif.fr/~jch/software/polipo/manual/index.html)
 
 ## Copyright
 
